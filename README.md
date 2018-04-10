@@ -1,1 +1,0 @@
-# nosql-music-tp
