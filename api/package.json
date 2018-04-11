@@ -5,6 +5,7 @@
     "bcrypt": "*",
     "body-parser": "*",
     "express": "*",
+    "mongodb": "^3.0.6",
     "morgan": "*",
     "mysql": "*",
     "node-gyp": "^3.6.2",
