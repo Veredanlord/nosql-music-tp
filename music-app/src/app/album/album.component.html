@@ -1,0 +1,10 @@
+<div class="row" style="margin-top: 10px;">
+  <div class="col-sm-3" *ngFor="let album of albums" style="margin: 10px 0;">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">{{album.title}} {{album.release}}</h5>
+        <p class="card-text">{{album.artistName}}</p>
+      </div>
+    </div>
+  </div>
+</div>

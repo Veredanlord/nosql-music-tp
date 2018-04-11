@@ -1,0 +1,12 @@
+<div class="row" style="margin-top: 10px;">
+  <div class="col-sm-3" *ngFor="let item of catalogue" style="margin: 10px 0;">
+    <div class="card">
+      <div class="card-body">
+        <img class="card-img-top" src="..\..\assets\img\{{item.image}}">
+        <h5 class="card-title">{{item.title}} {{item.release}}</h5>
+        <p class="card-text">{{item.artistName}}</p>
+        <a class="btn btn-primary">Buy ({{item.price}}€)</a>
+      </div>
+    </div>
+  </div>
+</div>

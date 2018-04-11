@@ -7,4 +7,7 @@ Router.route('/generate/:number')
 Router.route('/')
     .get(controller.getArtists);
 
+Router.route('/count')
+    .get(controller.count);
+
 module.exports = Router;

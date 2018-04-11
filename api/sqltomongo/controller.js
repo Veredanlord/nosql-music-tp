@@ -11,7 +11,8 @@ module.exports = {
   createArtists
 };
 
-const dir = "C:\\MAMP\\htdocs\\img\\";
+const dir = "C:\\Users\\VeredanLord\\Documents\\Dev\\nosql-music-tp\\music-app\\src\\assets\\img\\";
+
 const pool      =    mysql.createPool({
     connectionLimit : 100, //the number of pre-load connection.
     host     : 'localhost', // host of your mySql.
@@ -48,7 +49,7 @@ function createAlbums(req, res, next) {
                           artistName: artist.name,
                           artistId: artist.id,
                           price: row.alb_prix,
-                          image: dir + imageName,
+                          image: imageName,
                           release: row.alb_annee
                     });
                     newAlbum.save((err, data) => {

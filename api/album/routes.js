@@ -10,4 +10,8 @@ Router.route('/')
 Router.route('/catalogue/:sort')
     .get(controller.getFullList);
 
+Router.route('/count')
+    .get(controller.count);
+
+
 module.exports = Router;

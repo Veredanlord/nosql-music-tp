@@ -11,7 +11,8 @@ var countryGenerator = require('../generator/generator').generateCountry;
 
 module.exports = {
   generateArtists,
-  getArtists
+  getArtists,
+  count
 }
 
 function generateArtists(req, res, next) {
@@ -31,5 +32,11 @@ function generateArtists(req, res, next) {
 function getArtists(req, res, next) {
   Artist.find({}, {name: 1, style: 1, nationality: 1}).sort('+name').exec().then((artists) => {
     return res.json(artists);
+  });
+}
+
+function count(req, res, next) {
+  Artist.count({}).exec().then((count) => {
+    return res.json(count);
   });
 }

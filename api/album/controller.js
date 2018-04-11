@@ -13,10 +13,11 @@ var countryGenerator = require('../generator/generator').generateCountry;
 module.exports = {
   generateAlbums,
   getFullList,
-  getAlbums
+  getAlbums,
+  count
 }
 
-const dir = "C:\\MAMP\\htdocs\\img\\";
+const dir = "C:\\Users\\VeredanLord\\Documents\\Dev\\nosql-music-tp\\music-app\\src\\assets\\img\\";
 
 function generateAlbums(req, res, next) {
   console.log(Artist.find());
@@ -24,7 +25,7 @@ function generateAlbums(req, res, next) {
     for (var i = 0; i < Number(req.params.number); i++) {
       let randomNumber = Math.floor(Math.random() * Math.floor(artists.length));
       let albumName = nameGenerator(true);
-      let randomPrice = Math.random() * (500 - 0) + 0
+      let randomPrice = Math.floor(Math.random() * (500 - 0) + 0);
       let artist = artists[randomNumber];
       size = 200;
       value = artist.name + '-' + albumName;
@@ -37,7 +38,7 @@ function generateAlbums(req, res, next) {
             artistName: artist.name,
             artistId: artist.id,
             price: randomPrice,
-            image: dir + imageName,
+            image: imageName,
             release: release.getFullYear()
       });
       newAlbum.save((err, data) => {
@@ -59,7 +60,13 @@ function getFullList(req, res, next) {
 }
 
 function getAlbums(req, res, next) {
-  Album.find({}, {title: 1, release: 1, artistName: 1}).sort('+release').exec().then((test) => {
-    return res.json(test);
+  Album.find({}, {title: 1, release: 1, artistName: 1}).sort('+release').exec().then((albums) => {
+    return res.json(albums);
+  });
+}
+
+function count(req, res, next) {
+  Album.count({}).exec().then((count) => {
+    return res.json(count);
   });
 }

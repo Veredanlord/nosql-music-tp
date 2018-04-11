@@ -1,0 +1,10 @@
+<div class="row" style="margin-top: 10px;">
+  <div class="col-sm-3" *ngFor="let artist of artists" style="margin: 10px 0;">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">{{artist.name}}</h5>
+        <p class="card-text">{{artist.style}} ({{artist.nationality}})</p>
+      </div>
+    </div>
+  </div>
+</div>
