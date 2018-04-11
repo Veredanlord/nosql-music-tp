@@ -15,7 +15,7 @@ const AlbumSchema = new Schema({
         unique: false
     },
     artistId: {
-        type: Number,
+        type: String,
         required: true,
         unique: false
     },

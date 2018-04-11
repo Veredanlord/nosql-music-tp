@@ -7,7 +7,7 @@ const ArtistSchema = new Schema({
     name: {
         type: String,
         required: true,
-        unique: true
+        unique: false
     },
     nationality: {
         type: String,

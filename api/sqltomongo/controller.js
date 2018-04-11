@@ -4,6 +4,7 @@ var mongoose = require('mongoose');
 var fs = require('fs');
 var jpeg = require('jpeg-js');
 var mysql = require('mysql');
+var jdenticon = require("jdenticon");
 
 module.exports = {
   createAlbums,
@@ -25,17 +26,38 @@ const pool      =    mysql.createPool({
 function createAlbums(req, res, next) {
   var self = this;
   pool.getConnection((err,connection) => {
-    console.log(self);
       if(err) {
           self.stop(err);
       } else {
         var query = "SELECT art_nom, alb_nom, alb_annee, alb_prix from artistes, albums where art_id = alb_art";
         var table = ["artists", "albums"];
-        rows = self.performRequest(query, table, connection);
-        rows.forEach((row) => {
-          self.createAlbumFromRow(row);
+        query = mysql.format(query, table);
+        connection.query(query, (err,rows) => {
+            if(err) {
+                return res.json({"Error" : true, "Message" : "Error executing MySQL query"});
+            } else {
+                rows.forEach((row) => {
+                  Artist.findOne({ 'name': row.art_nom}, 'id name', (err, artist) => {
+                    size = 200;
+                    value = artist.name + '-' + row.alb_nom;
+                    png = jdenticon.toPng(value, size);
+                    var imageName = artist.name + '-' + row.alb_nom + '.png';
+                    fs.writeFileSync(dir + imageName, png);
+                    let newAlbum = new Album({
+                          title: row.alb_nom,
+                          artistName: artist.name,
+                          artistId: artist.id,
+                          price: row.alb_prix,
+                          image: dir + imageName,
+                    });
+                    newAlbum.save((err, data) => {
+                      if(err) return err;
+                    });
+                  });
+                });
+                return res.json(rows.length + 'added');
+            }
         });
-        return res.json(rows.length + 'added');
       }
   });
 }
@@ -54,7 +76,7 @@ function createArtists(req, res, next) {
               return res.json({"Error" : true, "Message" : "Error executing MySQL query", "Error2": err});
           } else {
               rows.forEach((row) => {
-                const newArtist = new Artist({
+                let newArtist = new Artist({
                       name: row.art_nom,
                       nationality: row.pay_libelle,
                       style: row.gen_libelle
@@ -68,60 +90,4 @@ function createArtists(req, res, next) {
         });
       }
   })
-}
-
-function createAlbumFromRow(row) {
-  Artist.findOne({'name': row.art_name}, 'id name', (artist) => {
-    console.log(self);
-    var image = this.createRawImage();
-    var imageName = artist.name + '-' + row.alb_nom;
-    this.saveImage(image, imageName);
-    const newAlbum = new Album({
-          title: row.alb_nom,
-          artistName: artist.name,
-          artistId: artist.id,
-          price: row.alb_prix,
-          image: dir + imageName,
-    });
-    newAlbum.save((err, data) => {
-      if(err) return err;
-    });
-  })
-}
-
-function performRequest(query, table, connection) {
-  query = mysql.format(query, table);
-  connection.query(query, (err,rows) => {
-      if(err) {
-          return res.json({"Error" : true, "Message" : "Error executing MySQL query"});
-      } else {
-          return rows
-      }
-  });
-}
-
-function saveImage(rawImage, imageName) {
-  var jpegImageData = jpeg.encode(rawImage, 50);
-  fs.writeFile(dir + imageName, jpegImageData, 'binary', function(err){
-            if (err) throw err
-            console.log('File saved.')
-  })
-}
-
-function createRawImage() {
-  var width = 320, height = 180;
-  var frameData = new Buffer(width * height * 4);
-  var i = 0;
-  while (i < frameData.length) {
-    frameData[i++] = 0xFF; // red
-    frameData[i++] = 0x00; // green
-    frameData[i++] = 0x00; // blue
-    frameData[i++] = 0xFF; // alpha - ignored in JPEGs
-  }
-  var rawImageData = {
-    data: frameData,
-    width: width,
-    height: height
-  };
-  return rawImageData;
 }

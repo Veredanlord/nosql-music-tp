@@ -6,6 +6,7 @@
     "body-parser": "*",
     "es6": "0.0.7",
     "express": "*",
+    "jdenticon": "^2.0.0",
     "jpeg-js": "^0.3.4",
     "mongo": "^0.1.0",
     "mongodb": "^3.0.6",
