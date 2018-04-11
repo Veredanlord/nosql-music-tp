@@ -4,11 +4,16 @@
   "dependencies": {
     "bcrypt": "*",
     "body-parser": "*",
+    "es6": "0.0.7",
     "express": "*",
+    "jpeg-js": "^0.3.4",
+    "mongo": "^0.1.0",
     "mongodb": "^3.0.6",
+    "mongoose": "^5.0.14",
     "morgan": "*",
     "mysql": "*",
     "node-gyp": "^3.6.2",
+    "randomstring": "^1.1.5",
     "request-promise": "^4.2.2"
   },
   "description": "",

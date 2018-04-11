@@ -3,16 +3,11 @@ const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 
-const AlbumSchema = new Schema({
-    id: {
-        type: string,
-        required: true,
-        unique: true
-    },
+const ArtistSchema = new Schema({
     name: {
         type: String,
         required: true,
-        unique: false
+        unique: true
     },
     nationality: {
         type: String,
