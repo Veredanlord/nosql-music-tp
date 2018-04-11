@@ -30,6 +30,7 @@ function generateAlbums(req, res, next) {
       value = artist.name + '-' + albumName;
       png = jdenticon.toPng(value, size);
       let imageName = artist.name + '-' + albumName + '.png';
+      fs.writeFileSync(dir + imageName, png);
       let release = new Date;
       let newAlbum = new Album({
             title: albumName,
