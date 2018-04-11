@@ -29,7 +29,7 @@ function createAlbums(req, res, next) {
       if(err) {
           self.stop(err);
       } else {
-        var query = "SELECT art_nom, alb_nom, alb_annee, alb_prix from artistes, albums where art_id = alb_art";
+        var query = "SELECT art_nom, alb_nom, alb_annee, alb_prix, alb_annee from artistes, albums where art_id = alb_art";
         var table = ["artists", "albums"];
         query = mysql.format(query, table);
         connection.query(query, (err,rows) => {
@@ -49,6 +49,7 @@ function createAlbums(req, res, next) {
                           artistId: artist.id,
                           price: row.alb_prix,
                           image: dir + imageName,
+                          release: row.alb_annee
                     });
                     newAlbum.save((err, data) => {
                       if(err) return err;

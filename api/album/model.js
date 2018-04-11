@@ -28,6 +28,11 @@ const AlbumSchema = new Schema({
         type: String,
         required: true,
         unique: false
+    },
+    release: {
+        type: Number,
+        required: true,
+        unique: false
     }
 });
 

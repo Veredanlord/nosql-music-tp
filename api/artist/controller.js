@@ -10,7 +10,8 @@ var styleGenerator = require('../generator/generator').generateStyle;
 var countryGenerator = require('../generator/generator').generateCountry;
 
 module.exports = {
-  generateArtists
+  generateArtists,
+  getArtists
 }
 
 function generateArtists(req, res, next) {
@@ -25,4 +26,10 @@ function generateArtists(req, res, next) {
     });
   }
   return res.json(req.params.number + " added");
+}
+
+function getArtists(req, res, next) {
+  Artist.find({}, {name: 1, style: 1, nationality: 1}).sort('+name').exec().then((artists) => {
+    return res.json(artists);
+  });
 }
