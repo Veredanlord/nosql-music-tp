@@ -49,3 +49,28 @@ qui possède de nombreuses librairies permettant de se faciliter la vie lors du 
 - Le fait de ne pas avoir paginé l'application est resonsable de la plupart des temps de chargement
 - La génération et écriture des images ralonge les temps d'exécution
 ```
+
+# Utilisation :
+## Modififier le fichier de config
+Remplacer les valeurs par les informations de vos serveurs.
+```
+/api/config/config.js
+```
+## Lancer l'api
+```
+cd api
+node server.js
+```
+L'api est maintenant disponible sous :
+```
+localhost:3000
+```
+## Lancer la WebApp
+```
+cd music-app
+ng serve
+```
+L'application est dsponible sous : 
+```
+localhost:4200
+```
