@@ -5,17 +5,16 @@ var fs = require('fs');
 var jpeg = require('jpeg-js');
 var mysql = require('mysql');
 var jdenticon = require("jdenticon");
+var dir = require('../config/config').dir;
 
 module.exports = {
   createAlbums,
   createArtists
 };
 
-const dir = "C:\\Users\\VeredanLord\\Documents\\Dev\\nosql-music-tp\\music-app\\src\\assets\\img\\";
-
 const pool      =    mysql.createPool({
     connectionLimit : 100, //the number of pre-load connection.
-    host     : 'localhost', // host of your mySql.
+    host     : '', // host of your mySql.
     user     : 'root', // user of your mySql.
     password : 'root', // Password of your mySql.
     port : '3306', // Port of your mySql.

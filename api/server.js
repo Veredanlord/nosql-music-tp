@@ -4,6 +4,7 @@ var app  = express();
 var morgan = require('morgan');
 var mongoose = require('mongoose');
 var api =  require('./api');
+var mongo = require('./config/config').mongo;
 
 function REST(app){
     var self = this;
@@ -21,7 +22,7 @@ app.use('/api', api);
 
 REST.prototype.connectMongo = function() {
     mongoose
-        .connect('mongodb://localhost:27017/nosql_tp', (err) => {
+        .connect('mongodb://' + mongo.host + ':' + mongo.port + '/' + mongo.db, (err) => {
         if(err) {
           console.log(err);
         }

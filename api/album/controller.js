@@ -9,6 +9,7 @@ var jdenticon = require('jdenticon');
 var nameGenerator = require('../generator/generator').generateName;
 var styleGenerator = require('../generator/generator').generateStyle;
 var countryGenerator = require('../generator/generator').generateCountry;
+var dir = require('../config/config').dir;
 
 module.exports = {
   generateAlbums,
@@ -16,8 +17,6 @@ module.exports = {
   getAlbums,
   count
 }
-
-const dir = "C:\\Users\\VeredanLord\\Documents\\Dev\\nosql-music-tp\\music-app\\src\\assets\\img\\";
 
 function generateAlbums(req, res, next) {
   console.log(Artist.find());
