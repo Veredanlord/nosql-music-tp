@@ -56,6 +56,13 @@ Remplacer les valeurs par les informations de vos serveurs.
 ```
 /api/config/config.js
 ```
+## Ajout des paquets
+```
+cd api
+npm install
+cd ../music-app
+npm install
+```
 ## Lancer l'api
 ```
 cd api
