@@ -51,7 +51,8 @@ qui possède de nombreuses librairies permettant de se faciliter la vie lors du 
 ```
 
 # Utilisation :
-## Modififier le fichier de config
+
+## Modifier le fichier de config
 Remplacer les valeurs par les informations de vos serveurs.
 ```
 /api/config/config.js
